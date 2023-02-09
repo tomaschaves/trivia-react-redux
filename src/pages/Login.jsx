@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+// import { RequestAPIToken } from '../redux/actions/index';
 
 class Login extends Component {
   state = {
@@ -7,13 +10,18 @@ class Login extends Component {
     isDisabled: true,
   };
 
-  onClickButton = () => {
-    console.log('botão funcionando');
+  onClickButton = async () => {
+    const { history } = this.props;
+    history.push('/game');
+
+    const response = await fetch('https://opentdb.com/api_token.php?command=request');
+    const data = await response.json();
+    const { token } = data;
+
+    localStorage.setItem('token', token);
   };
 
   handleChange = ({ target: { name, value } }) => {
-    console.log('digitei');
-
     this.setState({
       [name]: value,
     }, () => {
@@ -76,4 +84,8 @@ class Login extends Component {
   }
 }
 
-export default Login;
+Login.propTypes = {
+  dispatch: PropTypes.func,
+}.isRequired;
+
+export default connect()(Login);
