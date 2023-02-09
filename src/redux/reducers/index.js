@@ -10,6 +10,10 @@ const INITIAL_STATE = {
 
 const exampleReducer = (state = INITIAL_STATE, { type /* , payload */ }) => {
   switch (type) {
+  // case TOKEN_PLAYER:
+  //   return {
+
+  // };
   default:
     return state;
   }
