@@ -1,1 +1,1 @@
-export const TOKEN_PLAYER = 'TOKEN_PLAYER';
+export const SAVE_EMAIL = 'SAVE_EMAIL';
