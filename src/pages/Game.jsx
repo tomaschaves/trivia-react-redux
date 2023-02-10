@@ -28,6 +28,7 @@ class Game extends Component {
   render() {
     const { results } = this.state;
     console.log(results);
+    const 
     return (
       <div>
         <h1>
@@ -36,13 +37,14 @@ class Game extends Component {
         <Header />
         <div>
           { results.map((result) => (
+          
             <div
               key={ result.category }
             >
               <p
                 data-testid="question-category"
               >
-                {`Categoria: ${result.category}`}
+                {`Categoria: ${result[Math.floor(result.length * Math.random())]}`}
 
               </p>
               <p
