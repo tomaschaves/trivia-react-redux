@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 class Header extends Component {
   render() {
     const { gravatarEmail, name } = this.props;
-    console.log(this.props);
 
     const link = `https://www.gravatar.com/avatar/${gravatarEmail}`;
 

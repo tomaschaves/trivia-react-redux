@@ -18,7 +18,12 @@ class Login extends Component {
     const data = await response.json();
     const { token } = data;
 
-    localStorage.setItem('token', token);
+    const numero64 = 64;
+    if (token.length === numero64) {
+      localStorage.setItem('token', token);
+    } else {
+      history.push('/');
+    }
 
     dispatch(actionGetGravatar({ ...this.state }));
   };
