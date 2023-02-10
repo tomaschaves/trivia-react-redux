@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { SAVE_EMAIL } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   name: '', // nome da pessoa
@@ -8,17 +9,19 @@ const INITIAL_STATE = {
 
 };
 
-const exampleReducer = (state = INITIAL_STATE, { type /* , payload */ }) => {
+const gameReducer = (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
-  // case TOKEN_PLAYER:
-  //   return {
-
-  // };
+  case SAVE_EMAIL:
+    return {
+      ...state,
+      name: payload[0],
+      gravatarEmail: payload[1],
+    };
   default:
     return state;
   }
 };
 
-const rootReducer = combineReducers({ exampleReducer });
+const rootReducer = combineReducers({ gameReducer });
 
 export default rootReducer;
