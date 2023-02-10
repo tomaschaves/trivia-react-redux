@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
-import { SAVE_EMAIL } from '../actions/actionTypes';
+import { SAVE_EMAIL, SHUFFLE_QUESTIONS } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   name: '', // nome da pessoa
   assertions: 0, // numero de acertos
   score: 0, // pontuação
   gravatarEmail: '', // e-mail da pessoa
+  questions: [],
 
 };
 
@@ -16,6 +17,11 @@ const gameReducer = (state = INITIAL_STATE, { type, payload }) => {
       ...state,
       name: payload[0],
       gravatarEmail: payload[1],
+    };
+  case SHUFFLE_QUESTIONS:
+    return {
+      ...state,
+      questions: payload,
     };
   default:
     return state;

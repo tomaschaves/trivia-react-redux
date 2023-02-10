@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { actionGetGravatar } from '../redux/actions/index';
+import { actionGetGravatar } from '../redux/actions/actionGetGravatar';
 
 class Login extends Component {
   state = {
@@ -12,20 +12,15 @@ class Login extends Component {
 
   onClickButton = async () => {
     const { history, dispatch } = this.props;
-    history.push('/game');
 
     const response = await fetch('https://opentdb.com/api_token.php?command=request');
     const data = await response.json();
     const { token } = data;
-
-    const numero64 = 64;
-    if (token.length === numero64) {
-      localStorage.setItem('token', token);
-    } else {
-      history.push('/');
-    }
+    localStorage.setItem('token', token);
 
     dispatch(actionGetGravatar({ ...this.state }));
+
+    history.push('/game');
   };
 
   handleChange = ({ target: { name, value } }) => {
