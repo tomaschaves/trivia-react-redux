@@ -43,6 +43,7 @@ class Questions extends Component {
         });
       });
     });
+    // acima, temos um array de objetos que possui todas as respostas para todas as questões
 
     // FINAL DA REALIZAÇÃO PÓS MONITORIA
     // console.log(answers);
@@ -57,8 +58,8 @@ class Questions extends Component {
     const MEIO = 0.5;
 
     // dentro da funca de ordenação(sort) eu vou querer utilizar um math.random-0.5 produza  resultado do sort
-
     // agora que tenho o array sorteado e unificado, utilizo o map
+
     return (
       <div>
         <h1
@@ -73,6 +74,7 @@ class Questions extends Component {
           { questions[indexQuestion].question }
         </p>
         {/* REALIZAÇÃO PÓS MONITORIA */}
+        {/* filtramos as respostas do array de respostas, com base no index da questão */}
         { answers.filter((answer) => (
           answer.question === indexQuestion
         ))
@@ -110,6 +112,7 @@ class Questions extends Component {
             <button
               key={ answer.tag }
               data-testid={ answer.tag }
+              // por algum motivo, não está funcionando colocar as funções passadas por props para os botões, seja a de onClick ou a de disabled, conferir isso. se colocamos elas com (), elas funcionam já na renderização, mas não é o que queremos
               // onClick={  }
               // disabled={ disable }
               // disabled="true"
