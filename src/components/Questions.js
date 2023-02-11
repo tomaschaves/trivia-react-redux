@@ -7,16 +7,53 @@ class Questions extends Component {
     indexQuestion: 0,
   };
 
+  handleClick = (xablau) => {
+    console.log(xablau);
+  };
+
   render() {
     const { indexQuestion } = this.state;
-    const { questions, disableButtons, handleClick } = this.props;
-    console.log(questions);
-    const { correct_answer, incorrect_answers } = questions[indexQuestion];
+    const { questions, disable, onClick } = this.props;
+    // console.log(disable);
+    // console.log(questions);
+    const {
+      correct_answer: correctAnswer,
+      incorrect_answers: incorrectAnswer,
+    } = questions[indexQuestion];
 
     // eu preciso criar um array com todas as alternativas
-    const arrayAnswers = [...incorrect_answers, correct_answer];
-    console.log(arrayAnswers);
+    const arrayAnswers = [...incorrectAnswer, correctAnswer];
+    // console.log(arrayAnswers);
 
+    // realização depois da monitoria V
+    const answers = [];
+
+    questions.forEach((question, index) => {
+      // console.log(question.category);
+      answers.push({
+        question: index,
+        answer: question.correct_answer,
+        tag: 'data-testid=correct-answer',
+      });
+      question.incorrect_answers.forEach((wronganswer, indexIncorrect) => {
+        answers.push({
+          question: index,
+          answer: wronganswer,
+          tag: `data-testid=wrong-answer-${indexIncorrect}`,
+        });
+      });
+    });
+
+    // FINAL DA REALIZAÇÃO PÓS MONITORIA
+    // console.log(answers);
+
+    // fazer um objeto com as opções correta e incorretas
+    // {
+    //   answer: ...incorrectAnswer[1],
+    //   data-testid='xablau-${index}'
+    //  }
+    // correct answer vou transformar nesse array acima, e o incorrect manipular para virar a mesma coisa
+    // na renderização dos botões, uso os dados dos objetos para isso
     const MEIO = 0.5;
 
     // dentro da funca de ordenação(sort) eu vou querer utilizar um math.random-0.5 produza  resultado do sort
@@ -35,28 +72,65 @@ class Questions extends Component {
         >
           { questions[indexQuestion].question }
         </p>
-        { arrayAnswers.sort(() => Math.random() - MEIO)
-          .map((answer, index = 0) => (
-            answer === questions[indexQuestion].correct_answer
-              ? <button
-                  key={ index }
-                  data-testid="correct-answer"
-                  onClick={ handleClick }
-                  disabled={ disableButtons }
-              >
-                { answer }
-              </button>
-              : <button
-                  key={ index }
-                  data-testid={ `wrong-answer-${indexQuestion}` }
-                  onClick={ handleClick }
-                  disabled={ disableButtons }
-              >
-                {' '}
-                { answer }
-                {' '}
+        {/* REALIZAÇÃO PÓS MONITORIA */}
+        { answers.filter((answer) => (
+          answer.question === indexQuestion
+        ))
+          .sort(() => Math.random() - MEIO)
+          .map((answer) => (
+            //       answer === questions[indexQuestion].correctAnswer
+            //         ? (
+            //           <button
+            //             key={ index }
+            //             data-testid="correct-answer"
+            //             onClick={ handleClick }
+            //             disabled={ disableButtons }
+            //           >
+            //             { answer }
+            //           </button>
+            //         )
+            //         : (
+            //           <button
+            //             key={ index }
+            //             data-testid={ `wrong-answer-${index}` }
+            //             onClick={ handleClick }
+            //             disabled={ disableButtons }
+            //           >
+            //             {' '}
+            //             { answer }
+            //             {' '}
 
-                </button>
+            //           </button>
+            //         )
+            //     ))}
+            // </div>
+
+            // answer === questions[indexQuestion].correctAnswer
+            //   ? (
+            <button
+              key={ answer.tag }
+              data-testid={ answer.tag }
+              // onClick={  }
+              // disabled={ disable }
+              // disabled="true"
+            >
+              { answer.answer }
+            </button>
+            // FINAL DA REALIZAÇÃO PÓS MONITORIA
+            // )
+            // : (
+            //   <button
+            //     key={ index }
+            //     data-testid={ `wrong-answer-${index}` }
+            //     onClick={ handleClick }
+            //     disabled={ disableButtons }
+            //   >
+            //     {' '}
+            //     { answer }
+            //     {' '}
+
+          //   </button>
+          // )
           ))}
       </div>
     );

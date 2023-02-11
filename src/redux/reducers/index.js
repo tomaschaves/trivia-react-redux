@@ -7,7 +7,6 @@ const INITIAL_STATE = {
   score: 0, // pontuação
   gravatarEmail: '', // e-mail da pessoa
   questions: [],
-
 };
 
 const gameReducer = (state = INITIAL_STATE, { type, payload }) => {

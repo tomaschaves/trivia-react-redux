@@ -11,6 +11,7 @@ class Game extends Component {
     seconds: 30,
     // numberOfQuestions: 1,
     endQuestion: false,
+    isLoading: true,
   };
 
   componentDidMount() {
@@ -25,6 +26,10 @@ class Game extends Component {
   }
 
   requestAPITrivia = async () => {
+    this.setState({
+      isLoading: true,
+    });
+
     try {
       const { history, dispatch } = this.props;
       // pega o token do LS
@@ -38,6 +43,9 @@ class Game extends Component {
         history.push('/');
       } else {
         dispatch(actionShuffle(results));
+        this.setState({
+          isLoading: false,
+        });
       }
     } catch (error) {
       console.log(error);
@@ -70,7 +78,8 @@ class Game extends Component {
   };
 
   render() {
-    const { seconds, endQuestion } = this.state;
+    const { seconds, endQuestion, isLoading } = this.state;
+    if (isLoading) return (<p>Loading...</p>);
     return (
       <div>
         <h1>
@@ -78,8 +87,8 @@ class Game extends Component {
         </h1>
         <Header />
         <Questions
-          disableButtons={ this.disableButtons }
-          handleClick={ this.handleClick }
+          disable={ this.disableButtons }
+          onClick={ this.handleClick }
         />
         {/* <div>
           <div
