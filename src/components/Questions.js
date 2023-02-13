@@ -3,21 +3,23 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 class Questions extends Component {
-  state = {
-    indexQuestion: 0,
-  };
+  // state = {
+  //   indexQuestion: 0,
+  // };
 
   // handleClick = (xablau) => {
   //   console.log(xablau);
   // };
 
   render() {
-    const { indexQuestion } = this.state;
+    // const { indexQuestion } = this.state;
     const { questions,
       disable,
       click,
+      number,
     } = this.props;
 
+    console.log(questions);
     // const {
     //   correct_answer: correctAnswer,
     //   incorrect_answers: incorrectAnswer,
@@ -44,6 +46,7 @@ class Questions extends Component {
         });
       });
     });
+    console.log(answers);
     // acima, temos um array de objetos que possui todas as respostas para todas as questões
 
     // FINAL DA REALIZAÇÃO PÓS MONITORIA
@@ -63,17 +66,17 @@ class Questions extends Component {
     return (
       <div>
         <h1 data-testid="question-category">
-          {questions[indexQuestion].category}
+          {questions[number].category}
         </h1>
         {/* // pega o array de objetos do estado global Questions, atribui o index, acessa a chave question */}
-        <p data-testid="question-text">{questions[indexQuestion].question}</p>
+        <p data-testid="question-text">{questions[number].question}</p>
         {/* REALIZAÇÃO PÓS MONITORIA */}
         {/* filtramos as respostas do array de respostas, com base no index da questão */}
         {/* LUANA: div, com o data test id */}
         <div data-testid="answer-options">
           {answers
           // filtra o array de respostas que esta ligado a pergunta do indexQuestion
-            .filter((answer) => answer.question === indexQuestion)
+            .filter((answer) => answer.question === number)
             .sort(() => Math.random() - MEIO)
             .map((answer) => (
               //       answer === questions[indexQuestion].correctAnswer
@@ -140,7 +143,7 @@ Questions.propTypes = {
   questions: PropTypes.array,
 }.isRequired;
 
-const mapStateToProps = ({ gameReducer: { questions } }) => ({
+const mapStateToProps = ({ player: { questions } }) => ({
   questions,
 });
 

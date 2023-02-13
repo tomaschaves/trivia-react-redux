@@ -3,15 +3,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Questions from '../components/Questions';
-import { actionShuffle } from '../redux/actions/actionShuffle';
+import {
+  actionShuffle,
+  correctAnswer,
+  incorrectAnswer,
+} from '../redux/actions/actionShuffle';
 // import { RequestAPIToken } from '../redux/actions/index';
 
 class Game extends Component {
   state = {
     seconds: 30,
-    // numberOfQuestions: 1,
+    numberOfQuestion: 0,
     endQuestion: false,
     isLoading: true,
+    // indexQuestion: 0,
   };
 
   componentDidMount() {
@@ -66,20 +71,35 @@ class Game extends Component {
     }
   };
 
-  handleClick = () => {
+  handleClick = ({ target }) => {
     clearInterval(this.intervalID);
     this.setState({
       endQuestion: true,
     });
+
+    const { seconds } = this.state;
+    const { dispatch } = this.props;
+
+    if (target.dataset.testid === 'correct-answer') {
+      dispatch(correctAnswer(seconds));
+    }
+    if (target.dataset.testid.includes('wrong-answer')) {
+      dispatch(incorrectAnswer());
+    }
   };
 
   nextQuestion = () => {
-    console.log('próxima');
+    const { numberOfQuestion } = this.state;
+    this.setState({
+      numberOfQuestion: numberOfQuestion + 1,
+      endQuestion: false,
+    });
   };
 
   render() {
-    const { seconds, endQuestion, isLoading } = this.state;
+    const { seconds, endQuestion, isLoading, numberOfQuestion } = this.state;
     if (isLoading) return (<p>Loading...</p>);
+    console.log(numberOfQuestion);
     return (
       <div>
         <h1>
@@ -89,6 +109,7 @@ class Game extends Component {
         <Questions
           disable={ this.disableButtons() }
           click={ this.handleClick }
+          number={ numberOfQuestion }
         />
         {/* <div>
           <div
