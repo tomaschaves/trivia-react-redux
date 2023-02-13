@@ -10,7 +10,18 @@ class Feedback extends Component {
     const userRanking = {
       name, score, link,
     };
-    localStorage.setItem('userRanking', JSON.stringify(userRanking));
+
+    if (!JSON.parse(localStorage.getItem('userRanking'))) {
+      localStorage.setItem(
+        'userRanking',
+        JSON.stringify(userRanking),
+      );
+    } else {
+      localStorage.setItem(
+        'userRanking',
+        JSON.stringify(...userRanking, userRanking),
+      );
+    }
   }
 
   render() {
