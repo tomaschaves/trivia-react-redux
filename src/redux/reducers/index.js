@@ -31,6 +31,7 @@ const player = (state = INITIAL_STATE, { type, payload }) => {
     return {
       ...state,
       score: state.score + payload,
+      assertions: state.assertions + 1,
     };
   case INCORRECT_ANSWER:
     return {
