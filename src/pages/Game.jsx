@@ -3,11 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Questions from '../components/Questions';
-import {
-  actionShuffle } from '../redux/actions/actionShuffle';
-import { correctAnswer,
-  incorrectAnswer } from '../redux/actions/actionAnswers';
-// import { RequestAPIToken } from '../redux/actions/index';
+import { actionShuffle } from '../redux/actions/actionShuffle';
+import { correctAnswer, incorrectAnswer } from '../redux/actions/actionAnswers';
 
 class Game extends Component {
   state = {
@@ -81,9 +78,6 @@ class Game extends Component {
     }
     if (target.dataset.testid.includes('wrong-answer')) {
       dispatch(incorrectAnswer());
-      // this.setState({
-      //   clicked: true,
-      // });
     }
   };
 
@@ -120,7 +114,6 @@ class Game extends Component {
     } = this.state;
 
     if (isLoading) return (<p>Loading...</p>);
-    console.log(numberOfQuestion);
     return (
       <div>
         <h1>

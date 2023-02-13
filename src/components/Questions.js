@@ -3,29 +3,21 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 class Questions extends Component {
-  // state = {
-  //   color:''
-  // }
-
   colorAnswer = (testID) => {
     const { colorButton } = this.props;
 
     if (colorButton) {
       if (testID === 'correct-answer') {
         return 'green-border';
-      } else {
-        return 'red-border';
       }
-    };
+      return 'red-border';
+    }
     return '';
   };
 
   render() {
-    const { questions, disable, click, number, colorButton } = this.props;
+    const { questions, disable, click, number } = this.props;
 
-    console.log(questions);
-
-    // realização depois da monitoria V
     const answers = [];
 
     questions.forEach((question, index) => {
@@ -42,10 +34,9 @@ class Questions extends Component {
         });
       });
     });
-    console.log(answers);
     // acima, temos um array de objetos que possui todas as respostas para todas as questões
 
-    // na renderização dos botões, uso os dados dos objetos do array para isso
+    // na renderização dos botões, usamos os dados dos objetos do array para isso
     const MEIO = 0.5;
 
     return (
@@ -57,7 +48,7 @@ class Questions extends Component {
         <div data-testid="answer-options">
           {answers
             // filtra o array de respostas que esta ligado a pergunta do indexQuestion
-            // dentro da funca de ordenação(sort) eu vou querer utilizar um math.random-0.5
+            // dentro da função de ordenação(sort) eu vou querer utilizar um math.random-0.5
             // agora que tenho o array sorteado e unificado, utilizo o map
             .filter((answer) => answer.question === number)
             .sort(() => Math.random() - MEIO)
