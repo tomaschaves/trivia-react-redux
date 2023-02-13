@@ -3,8 +3,25 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 class Questions extends Component {
+  // state = {
+  //   color:''
+  // }
+
+  colorAnswer = (testID) => {
+    const { colorButton } = this.props;
+
+    if (colorButton) {
+      if (testID === 'correct-answer') {
+        return 'green-border';
+      } else {
+        return 'red-border';
+      }
+    };
+    return '';
+  };
+
   render() {
-    const { questions, disable, click, number, colorButton, isClicked } = this.props;
+    const { questions, disable, click, number, colorButton } = this.props;
 
     console.log(questions);
 
@@ -50,8 +67,7 @@ class Questions extends Component {
                 data-testid={ answer.tag }
                 onClick={ click }
                 disabled={ disable }
-                className={ (isClicked === 'yes' && colorButton) ? 'green-border' : 'red-border' }
-                // className={ (isClicked && colorButton) ? 'green-border' : 'red-border' }
+                className={ this.colorAnswer(answer.tag) }
               >
                 {answer.answer}
               </button>

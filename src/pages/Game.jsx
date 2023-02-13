@@ -15,8 +15,7 @@ class Game extends Component {
     numberOfQuestion: 0,
     endQuestion: false,
     isLoading: true,
-    iscorrectButton: false,
-    clicked: 'no',
+    clicked: false,
   };
 
   componentDidMount() {
@@ -73,19 +72,18 @@ class Game extends Component {
     const { seconds } = this.state;
     const { dispatch } = this.props;
 
+    this.setState({
+      clicked: true,
+    });
+
     if (target.dataset.testid === 'correct-answer') {
       dispatch(correctAnswer(seconds));
-      this.setState({
-        clicked: 'yes',
-        iscorrectButton: true,
-      });
     }
     if (target.dataset.testid.includes('wrong-answer')) {
       dispatch(incorrectAnswer());
-      this.setState({
-        clicked: 'yes',
-        iscorrectButton: false,
-      });
+      // this.setState({
+      //   clicked: true,
+      // });
     }
   };
 
@@ -108,7 +106,6 @@ class Game extends Component {
         clicked: false,
         numberOfQuestion: numberOfQuestion + 1,
         endQuestion: false,
-        iscorrectButton: '',
       });
     }
   };
@@ -119,7 +116,6 @@ class Game extends Component {
       endQuestion,
       isLoading,
       numberOfQuestion,
-      iscorrectButton,
       clicked,
     } = this.state;
 
@@ -135,8 +131,7 @@ class Game extends Component {
           disable={ this.disableButtons() }
           click={ this.handleClick }
           number={ numberOfQuestion }
-          colorButton={ iscorrectButton }
-          isClicked={ clicked }
+          colorButton={ clicked }
         />
         <h2>{ seconds }</h2>
         {
