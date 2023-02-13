@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import {
   CORRECT_ANSWER,
   INCORRECT_ANSWER,
+  RESET_GAME,
   SAVE_EMAIL,
   SHUFFLE_QUESTIONS,
 } from '../actions/actionTypes';
@@ -36,6 +37,14 @@ const player = (state = INITIAL_STATE, { type, payload }) => {
   case INCORRECT_ANSWER:
     return {
       ...state,
+    };
+  case RESET_GAME:
+    return {
+      name: '', // nome da pessoa
+      assertions: 0, // numero de acertos
+      score: 0, // pontuação
+      gravatarEmail: '', // e-mail da pessoa
+      questions: [],
     };
   default:
     return state;

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actionGetGravatar } from '../redux/actions/actionGetGravatar';
+import { resetGame } from '../redux/actions/actionResetGame';
 
 class Login extends Component {
   state = {
@@ -9,6 +10,11 @@ class Login extends Component {
     email: '',
     isDisabled: true,
   };
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(resetGame());
+  }
 
   onClickButton = async () => {
     const { history, dispatch } = this.props;
