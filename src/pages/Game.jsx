@@ -15,6 +15,8 @@ class Game extends Component {
     numberOfQuestion: 0,
     endQuestion: false,
     isLoading: true,
+    iscorrectButton: false,
+    clicked: 'no',
   };
 
   componentDidMount() {
@@ -73,9 +75,17 @@ class Game extends Component {
 
     if (target.dataset.testid === 'correct-answer') {
       dispatch(correctAnswer(seconds));
+      this.setState({
+        clicked: 'yes',
+        iscorrectButton: true,
+      });
     }
     if (target.dataset.testid.includes('wrong-answer')) {
       dispatch(incorrectAnswer());
+      this.setState({
+        clicked: 'yes',
+        iscorrectButton: false,
+      });
     }
   };
 
@@ -88,14 +98,31 @@ class Game extends Component {
 
   nextQuestion = () => {
     const { numberOfQuestion } = this.state;
-    this.setState({
-      numberOfQuestion: numberOfQuestion + 1,
-      endQuestion: false,
-    });
+    const { history } = this.props;
+    const maximumNumberOfQuestions = 4;
+
+    if (numberOfQuestion === maximumNumberOfQuestions) {
+      history.push('/feedback');
+    } else if (numberOfQuestion < maximumNumberOfQuestions) {
+      this.setState({
+        clicked: false,
+        numberOfQuestion: numberOfQuestion + 1,
+        endQuestion: false,
+        iscorrectButton: '',
+      });
+    }
   };
 
   render() {
-    const { seconds, endQuestion, isLoading, numberOfQuestion } = this.state;
+    const {
+      seconds,
+      endQuestion,
+      isLoading,
+      numberOfQuestion,
+      iscorrectButton,
+      clicked,
+    } = this.state;
+
     if (isLoading) return (<p>Loading...</p>);
     console.log(numberOfQuestion);
     return (
@@ -108,6 +135,8 @@ class Game extends Component {
           disable={ this.disableButtons() }
           click={ this.handleClick }
           number={ numberOfQuestion }
+          colorButton={ iscorrectButton }
+          isClicked={ clicked }
         />
         <h2>{ seconds }</h2>
         {

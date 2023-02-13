@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 class Questions extends Component {
   render() {
-    const { questions, disable, click, number } = this.props;
+    const { questions, disable, click, number, colorButton, isClicked } = this.props;
 
     console.log(questions);
 
@@ -50,6 +50,8 @@ class Questions extends Component {
                 data-testid={ answer.tag }
                 onClick={ click }
                 disabled={ disable }
+                className={ (isClicked === 'yes' && colorButton) ? 'green-border' : 'red-border' }
+                // className={ (isClicked && colorButton) ? 'green-border' : 'red-border' }
               >
                 {answer.answer}
               </button>
