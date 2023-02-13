@@ -4,10 +4,9 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Questions from '../components/Questions';
 import {
-  actionShuffle,
-  correctAnswer,
-  incorrectAnswer,
-} from '../redux/actions/actionShuffle';
+  actionShuffle } from '../redux/actions/actionShuffle';
+import { correctAnswer,
+  incorrectAnswer } from '../redux/actions/actionAnswers';
 // import { RequestAPIToken } from '../redux/actions/index';
 
 class Game extends Component {
@@ -16,7 +15,6 @@ class Game extends Component {
     numberOfQuestion: 0,
     endQuestion: false,
     isLoading: true,
-    // indexQuestion: 0,
   };
 
   componentDidMount() {
@@ -64,13 +62,6 @@ class Game extends Component {
     }, oneSecond);
   };
 
-  disableButtons = () => {
-    const { seconds, endQuestion } = this.state;
-    if (seconds === 0 || endQuestion) {
-      return true;
-    }
-  };
-
   handleClick = ({ target }) => {
     clearInterval(this.intervalID);
     this.setState({
@@ -85,6 +76,13 @@ class Game extends Component {
     }
     if (target.dataset.testid.includes('wrong-answer')) {
       dispatch(incorrectAnswer());
+    }
+  };
+
+  disableButtons = () => {
+    const { seconds, endQuestion } = this.state;
+    if (seconds === 0 || endQuestion) {
+      return true;
     }
   };
 
@@ -111,40 +109,7 @@ class Game extends Component {
           click={ this.handleClick }
           number={ numberOfQuestion }
         />
-        {/* <div>
-          <div
-            data-testid="answer-options"
-          />
-        </div> */}
         <h2>{ seconds }</h2>
-        {/* <button
-          data-testid="correct-answer"
-          disabled={ this.disableButtons() }
-          onClick={ this.handleClick }
-        >
-          A
-        </button>
-        <button
-          data-testid="wrong-answer"
-          disabled={ this.disableButtons() }
-          onClick={ this.handleClick }
-        >
-          B
-        </button>
-        <button
-          data-testid="wrong-answer"
-          disabled={ this.disableButtons() }
-          onClick={ this.handleClick }
-        >
-          C
-        </button>
-        <button
-          data-testid="wrong-answer"
-          disabled={ this.disableButtons() }
-          onClick={ this.handleClick }
-        >
-          D
-        </button> */}
         {
           endQuestion
           && <button data-testid="btn-next" onClick={ this.nextQuestion }>Next</button>
