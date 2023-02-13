@@ -24,7 +24,7 @@ class Header extends Component {
         <p
           data-testid="header-score"
         >
-          Placar:
+          {/* Placar: */}
           { score }
         </p>
       </header>
