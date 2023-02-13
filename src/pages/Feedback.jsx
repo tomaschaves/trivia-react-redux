@@ -4,6 +4,15 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 
 class Feedback extends Component {
+  componentDidMount() {
+    const { name, score, gravatarEmail } = this.props;
+    const link = `https://www.gravatar.com/avatar/${gravatarEmail}`;
+    const userRanking = {
+      name, score, link,
+    };
+    localStorage.setItem('userRanking', JSON.stringify(userRanking));
+  }
+
   render() {
     const { assertions, score, history } = this.props;
     const minimum3 = 3;
@@ -48,9 +57,11 @@ Feedback.propTypes = {
   score: PropTypes.number,
 }.isRequired;
 
-const mapStateToProps = ({ player: { assertions, score } }) => ({
+const mapStateToProps = ({ player: { assertions, score, gravatarEmail, name } }) => ({
   assertions,
   score,
+  gravatarEmail,
+  name,
 });
 
 export default connect(mapStateToProps)(Feedback);
