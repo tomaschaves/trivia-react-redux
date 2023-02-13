@@ -87,8 +87,8 @@ class Game extends Component {
         </h1>
         <Header />
         <Questions
-          disable={ this.disableButtons }
-          onClick={ this.handleClick }
+          disable={ this.disableButtons() }
+          click={ this.handleClick }
         />
         {/* <div>
           <div

@@ -14,8 +14,8 @@ class Questions extends Component {
   render() {
     const { indexQuestion } = this.state;
     const { questions,
-      //  disable,
-      //   onClick
+      disable,
+      click,
     } = this.props;
 
     // const {
@@ -109,9 +109,8 @@ class Questions extends Component {
                 key={ answer.tag }
                 data-testid={ answer.tag }
                 // por algum motivo, não está funcionando colocar as funções passadas por props para os botões, seja a de onClick ou a de disabled, conferir isso. se colocamos elas com (), elas funcionam já na renderização, mas não é o que queremos
-                // onClick={  }
-                // disabled={ disable }
-                // disabled="true"
+                onClick={ click }
+                disabled={ disable }
               >
                 {answer.answer}
               </button>
