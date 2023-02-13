@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class Ranking extends Component {
   render() {
+    const { history } = this.props;
     return (
       <div>
         <h1
@@ -10,11 +13,22 @@ class Ranking extends Component {
           Ranking
 
         </h1>
-
+        <button
+          type="button"
+          onClick={ () => history.push('/') }
+          data-testid="btn-go-home"
+        >
+          Login
+        </button>
       </div>
-
     );
   }
 }
 
-export default Ranking;
+Ranking.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
+}.isRequired;
+
+export default connect()(Ranking);
