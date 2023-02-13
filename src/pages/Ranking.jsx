@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 
 class Ranking extends Component {
   render() {
-    const { history, gravatarEmail, name, score } = this.props;
-
-    const link = `https://www.gravatar.com/avatar/${gravatarEmail}`;
+    const existingRanking = JSON.parse(localStorage.getItem('userRanking'));
+    const { history } = this.props;
 
     return (
       <div>
@@ -17,18 +16,26 @@ class Ranking extends Component {
 
         </h1>
         <ul>
-          <li>
-            <img
-              src={ link }
-              alt="img-gravatar"
-            />
-          </li>
-          <li>
-            { name }
-          </li>
-          <li>
-            { score }
-          </li>
+          {
+            existingRanking
+              .sort((a, b) => b.score - a.score)
+              .map((person, index = 0) => (
+                <div key={ index }>
+                  <li>
+                    <img
+                      src={ person.link }
+                      alt="img-gravatar"
+                    />
+                  </li>
+                  <li data-testid={ `player-name-${index}` }>
+                    { person.name }
+                  </li>
+                  <li data-testid={ `player-score-${index}` }>
+                    { person.score }
+                  </li>
+                </div>
+              ))
+          }
         </ul>
         <button
           type="button"

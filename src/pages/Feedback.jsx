@@ -14,15 +14,19 @@ class Feedback extends Component {
     if (!JSON.parse(localStorage.getItem('userRanking'))) {
       localStorage.setItem(
         'userRanking',
-        JSON.stringify(userRanking),
+        JSON.stringify([userRanking]),
       );
     } else {
-      localStorage.setItem(
-        'userRanking',
-        JSON.stringify(...userRanking, userRanking),
-      );
+      const existingRanking = JSON.parse(localStorage.getItem('userRanking'));
+      const newRanking = [...existingRanking, userRanking];
+      localStorage.setItem('userRanking', JSON.stringify(newRanking));
     }
   }
+
+  playAgain = () => {
+    const { history } = this.props;
+    history.push('/');
+  };
 
   render() {
     const { assertions, score, history } = this.props;
@@ -46,7 +50,7 @@ class Feedback extends Component {
         <button
           type="button"
           data-testid="btn-play-again"
-          onClick={ () => history.push('/') }
+          onClick={ this.playAgain }
         >
           Play Again
         </button>
