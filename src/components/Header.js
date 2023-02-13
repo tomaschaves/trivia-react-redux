@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 
 class Header extends Component {
   render() {
-    const { gravatarEmail, name } = this.props;
-    console.log(this.props);
+    const { gravatarEmail, name, score } = this.props;
 
     const link = `https://www.gravatar.com/avatar/${gravatarEmail}`;
 
@@ -25,7 +24,8 @@ class Header extends Component {
         <p
           data-testid="header-score"
         >
-          Placar:0
+          Placar:
+          { score }
         </p>
       </header>
     );
@@ -36,9 +36,10 @@ Header.propTypes = {
   gravatarEmail: PropTypes.string,
 }.isRequired;
 
-const mapStateToProps = ({ gameReducer: { gravatarEmail, name } }) => ({
+const mapStateToProps = ({ player: { gravatarEmail, name, score } }) => ({
   gravatarEmail,
   name,
+  score,
 });
 
 export default connect(mapStateToProps)(Header);
