@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import '../css/Header.css';
+import '../css/Button.css';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -9,23 +11,30 @@ class Header extends Component {
     const link = `https://www.gravatar.com/avatar/${gravatarEmail}`;
 
     return (
-      <header>
-        <img
-          src={ link }
-          alt="img-gravatar"
-          data-testid="header-profile-picture"
-        />
-        <h1
-          data-testid="header-player-name"
-        >
-          {' '}
-          { name }
-        </h1>
-        <p
-          data-testid="header-score"
-        >
-          { score }
-        </p>
+      <header className="App-header">
+        <div className="id-hender">
+          <img
+            src={ link }
+            className="header-img"
+            alt="img-gravatar"
+            data-testid="header-profile-picture"
+          />
+          <h1
+            data-testid="header-player-name"
+            className="header-h1-a"
+          >
+            {' '}
+            { name }
+          </h1>
+        </div>
+        <div>
+          <p
+            className="header-score"
+            data-testid="header-score"
+          >
+            { score }
+          </p>
+        </div>
       </header>
     );
   }

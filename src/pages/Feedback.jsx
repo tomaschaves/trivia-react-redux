@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import '../css/Feedback.css';
 import Header from '../components/Header';
 
 class Feedback extends Component {
@@ -32,36 +33,43 @@ class Feedback extends Component {
     const { assertions, score, history } = this.props;
     const minimum3 = 3;
     return (
-      <div>
-        <Header />
-        <p data-testid="feedback-text">
-          { assertions < minimum3 ? 'Could be better...' : 'Well Done!'}
-        </p>
-        <p
-          data-testid="feedback-total-question"
-        >
-          { assertions }
-        </p>
-        <p
-          data-testid="feedback-total-score"
-        >
-          { score }
-        </p>
-        <button
-          type="button"
-          data-testid="btn-play-again"
-          onClick={ this.playAgain }
-        >
-          Play Again
-        </button>
-        <button
-          type="button"
-          data-testid="btn-ranking"
-          onClick={ () => history.push('/ranking') }
-        >
-          Ranking
-        </button>
+      <div className="feedback">
+        <div className="feedback-is">
+          <Header />
+          <div className="feed">
+            <p data-testid="feedback-text">
+              { assertions < minimum3 ? 'Could be better...' : 'Well Done!'}
+            </p>
+            <p
+              className="rende"
+              data-testid="feedback-total-question"
+            >
+              { assertions }
+            </p>
+            <p
+              data-testid="feedback-total-score"
+            >
+              { score }
+            </p>
+          </div>
+          <button
+            type="button"
+            className="button-17"
+            data-testid="btn-play-again"
+            onClick={ this.playAgain }
+          >
+            Play Again
+          </button>
+          <button
+            type="button"
+            className="button-17"
+            data-testid="btn-ranking"
+            onClick={ () => history.push('/ranking') }
+          >
+            Ranking
+          </button>
 
+        </div>
       </div>
     );
   }

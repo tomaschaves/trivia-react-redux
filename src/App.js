@@ -10,12 +10,16 @@ import Ranking from './pages/Ranking';
 
 export default function App() {
   return (
-    <Switch>
-      <Route exact path="/" component={ Login } />
-      <Route exact path="/game" component={ Game } />
-      <Route exact path="/settings" component={ Settings } />
-      <Route exact path="/feedback" component={ Feedback } />
-      <Route exact path="/ranking" component={ Ranking } />
-    </Switch>
+    <div className="App">
+      <div className="App-page">
+        <Switch>
+          <Route exact path="/" component={ Login } />
+          <Route exact path="/game" component={ Game } />
+          <Route exact path="/settings" component={ Settings } />
+          <Route exact path="/feedback" component={ Feedback } />
+          <Route exact path="/ranking" component={ Ranking } />
+        </Switch>
+      </div>
+    </div>
   );
 }

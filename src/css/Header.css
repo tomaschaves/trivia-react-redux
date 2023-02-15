@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital@1&display=swap');
+
+.header-img {
+    border-radius: 40px;
+    margin-top: 8px;
+    width: 50px;
+    right: 20px;
+    height: 50px;
+}
+
+.header-h1-a {
+  text-align: center;
+  color: #0A66C2;
+  margin-bottom: 15px;
+  font-weight: 600;
+  font-size: 40px;
+  margin-top: 8px;
+  font-family: 'Noto Serif', serif;
+}
+
+.header-score {
+    color: #0A66C2;
+    font-size: 19px;
+    font-weight: 600;
+    margin-top: 9px;
+}
+
+.id-hender {
+    display: flex;
+    justify-content: center;
+}
+
+.question-h1 {
+    color: #0A66C2;
+    font-size: 35px;
+    margin-top: 20px;
+}
+
+.question-p {
+    color: #4e0f79;
+    font-size: 18px;
+    margin-top: 20px;
+}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import '../css/Header.css';
 import PropTypes from 'prop-types';
 
 class Questions extends Component {
@@ -41,9 +42,20 @@ class Questions extends Component {
 
     return (
       <div>
-        <h1 data-testid="question-category">{questions[number].category}</h1>
+        <h1
+          className="question-h1"
+          data-testid="question-category"
+        >
+          {questions[number].category}
+        </h1>
         {/* // pega o array de objetos do estado global Questions, atribui o index, acessa a chave question */}
-        <p data-testid="question-text">{questions[number].question}</p>
+        <p
+          className="question-p"
+          data-testid="question-text"
+        >
+          {questions[number].question}
+
+        </p>
         {/* filtramos as respostas do array de respostas, com base no index da questão */}
         <div data-testid="answer-options">
           {answers

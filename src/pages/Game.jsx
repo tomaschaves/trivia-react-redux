@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
+import '../css/Game.css';
+import '../App.css';
 import Questions from '../components/Questions';
 import { actionShuffle } from '../redux/actions/actionShuffle';
 import { correctAnswer, incorrectAnswer } from '../redux/actions/actionAnswers';
@@ -116,21 +118,32 @@ class Game extends Component {
     if (isLoading) return (<p>Loading...</p>);
     return (
       <div>
-        <h1>
+        <h1 className="game-h1">
           Game
         </h1>
-        <Header />
-        <Questions
-          disable={ this.disableButtons() }
-          click={ this.handleClick }
-          number={ numberOfQuestion }
-          colorButton={ clicked }
-        />
-        <h2>{ seconds }</h2>
-        {
-          endQuestion
-          && <button data-testid="btn-next" onClick={ this.nextQuestion }>Next</button>
-        }
+        <div className="hende-game">
+          <Header />
+          <Questions
+            disable={ this.disableButtons() }
+            click={ this.handleClick }
+            number={ numberOfQuestion }
+            colorButton={ clicked }
+          />
+          <h2 className="game-h2">{ seconds }</h2>
+          <div>
+            {
+              endQuestion
+            && <button
+              className="button-18"
+              data-testid="btn-next"
+              onClick={ this.nextQuestion }
+            >
+              Next
+
+            </button>
+            }
+          </div>
+        </div>
       </div>
     );
   }
